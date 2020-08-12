@@ -1,4 +1,5 @@
 const CronJob = require('cron').CronJob;
+const mongoose = require('mongoose');
 
 const kartoffel = require('./kartoffel/kartoffel.service');
 const config = require('./config');
@@ -46,19 +47,16 @@ function getMembersCounts(members) {
     return counts;
 }
 
-function isGroupMador(groupID) {
-    return config.madors.includes(groupID);
-}
-
 async function onCronStart() {
     try {
         logger.log('cron job starting now');
+        await mongoose.connect(`${config.mongo.connectionString}/group`);
 
         const groups = await kartoffel.getAllHierarchy();
         groups.forEach(async (group) => {
             if (findCommonElement(config.madors, group.ancestors)) return;
 
-            const isMador = isGroupMador();
+            const isMador = config.madors.includes(groupID);
             let members;
             // if (isMador) {
             members = await kartoffel.getAllMembers(group.id)
@@ -80,6 +78,7 @@ async function onCronStart() {
             }
 
             console.log(groupBody)
+            await mongoose.disconnect();
         });
     } catch (err) {
         logger.log(err, Error)

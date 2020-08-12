@@ -10,6 +10,9 @@ const config = {
     cron: {
         timeZone: process.env.TIME_ZONE || 'Asia/Jerusalem'
     },
+    mongo: {
+        connectionString: process.env.MONGO_URL ? `mongodb://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@${process.env.MONGO_URL}` : 'mongodb://mongo:27017'
+    },
     madors: process.env.MADORIM_LIST ? process.env.MADORIM_LIST.split(',') : ['5ead97fbed7c45b55922ea67', '5ead97feed7c45b55922ea6f', '5ead97fced7c45b55922ea69']
 }
 

@@ -20,6 +20,7 @@
   "dependencies": {
     "axios": "^0.19.2",
     "cron": "^1.8.2",
+    "mongoose": "^5.9.28",
     "spike-get-token": "^1.1.1"
   },
   "devDependencies": {}
