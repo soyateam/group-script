@@ -1,4 +1,7 @@
-const GroupModel = require('./group.model');
+const { GroupModel } = require('./group.model');
 
-async function createGroup(body) {
+async function createGroup(group) {
+    GroupModel.create(group);
 }
+
+module.exports = { createGroup }

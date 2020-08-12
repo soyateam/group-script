@@ -1,0 +1,18 @@
+version: "3"
+services:
+  group-script:
+    image: group-script
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      DB_NAME: task
+      KARTTOFEL_URL: http://kartoffel-master.eastus.cloudapp.azure.com:3000
+      HIERARCHY_ROOT_ID: 5e56858e4203fc40043591a5
+      SPIKE_CLIENT_ID: fff
+      SPIKE_CLIENT_SECRET: fff
+      TIME_ZONE: Asia/Jerusalem
+    depends_on:
+      - mongo
+  mongo:
+    image: mongo:latest

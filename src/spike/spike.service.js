@@ -7,3 +7,5 @@ async function getKartoffelToken() {
     const token = await getToken();
     return token;
 }
+
+module.exports = { getKartoffelToken }

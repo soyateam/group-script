@@ -1,5 +1,6 @@
-const Schema = require('mongoose').Schema;
+const mongoose = require('mongoose');
 
+const Schema = mongoose.Schema;
 const ObjectId = Schema.Types.ObjectId;
 
 const groupSchema = new Schema(
@@ -61,4 +62,6 @@ const groupSchema = new Schema(
     }
 );
 
-module.exports = mongoose.model('group', groupSchema);
+const GroupModel = mongoose.model('group', groupSchema);
+
+module.exports = { GroupModel };

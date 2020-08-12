@@ -1,5 +1,5 @@
 const axios = require('axios').default;
-const config = require('../config');
+const { config } = require('../config');
 
 async function getAllHierarchy() {
     const res = await axios.get(`${config.kartoffel.url}/api/organizationGroups/${config.kartoffel.rootID}/children`);

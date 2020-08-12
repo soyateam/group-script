@@ -16,4 +16,4 @@ const config = {
     madors: process.env.MADORIM_LIST ? process.env.MADORIM_LIST.split(',') : ['5ead97fbed7c45b55922ea67', '5ead97feed7c45b55922ea6f', '5ead97fced7c45b55922ea69']
 }
 
-module.exports = config;
+module.exports = { config };

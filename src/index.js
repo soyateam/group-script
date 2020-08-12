@@ -1,8 +1,9 @@
 const CronJob = require('cron').CronJob;
 const mongoose = require('mongoose');
 
+const { config } = require('./config');
+const groupRepository = require('./group/group.repository');
 const kartoffel = require('./kartoffel/kartoffel.service');
-const config = require('./config');
 const logger = require('./utils/logger');
 
 function findCommonElement(array1, array2) {
@@ -50,13 +51,13 @@ function getMembersCounts(members) {
 async function onCronStart() {
     try {
         logger.log('cron job starting now');
-        await mongoose.connect(`${config.mongo.connectionString}/group`);
+        await mongoose.connect(config.mongo.connectionString, { useNewUrlParser: true });
 
         const groups = await kartoffel.getAllHierarchy();
         groups.forEach(async (group) => {
             if (findCommonElement(config.madors, group.ancestors)) return;
 
-            const isMador = config.madors.includes(groupID);
+            const isMador = config.madors.includes(group.id);
             let members;
             // if (isMador) {
             members = await kartoffel.getAllMembers(group.id)
@@ -78,6 +79,7 @@ async function onCronStart() {
             }
 
             console.log(groupBody)
+            await groupRepository.createGroup(groupBody);
             await mongoose.disconnect();
         });
     } catch (err) {
@@ -86,9 +88,7 @@ async function onCronStart() {
     }
 }
 
-// (() => {
-//     const job = new CronJob('* * * * *', onCronStart, null, true, config.cron.timeZone);
-//     job.start();
-// })();
-
-onCronStart()
+(() => {
+    const job = new CronJob('* * * * *', onCronStart, null, true, config.cron.timeZone);
+    job.start();
+})();
