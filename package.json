@@ -1,0 +1,26 @@
+{
+  "name": "group-script",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/soyateam/group-script.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/soyateam/group-script/issues"
+  },
+  "homepage": "https://github.com/soyateam/group-script#readme",
+  "dependencies": {
+    "axios": "^0.19.2",
+    "cron": "^1.8.2",
+    "spike-get-token": "^1.1.1"
+  },
+  "devDependencies": {}
+}
